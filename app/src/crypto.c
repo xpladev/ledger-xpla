@@ -34,7 +34,6 @@ zxerr_t crypto_extractPublicKey(const uint32_t path[HDPATH_LEN_DEFAULT], uint8_t
     cx_ecfp_public_key_t cx_publicKey;
     cx_ecfp_private_key_t cx_privateKey;
     uint8_t privateKeyData[32];
-    uint8_t hashAddress[33];
 
     if (pubKeyLen < PK_LEN_SECP256K1) {
         return zxerr_invalid_crypto_settings;

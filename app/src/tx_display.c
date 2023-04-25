@@ -311,11 +311,6 @@ parser_error_t tx_indexRootFields() {
     return parser_ok;
 }
 
-__Z_INLINE bool is_default_chainid() {
-    CHECK_PARSER_ERR(tx_indexRootFields())
-    return display_cache.is_default_chain;
-}
-
 bool tx_is_expert_mode() {
     return app_mode_expert();
 }
