@@ -1,0 +1,2191 @@
+[
+  {
+    "name": "empty",
+    "tx": "",
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing chain_id",
+    "expected": [],
+    "expert": true
+  },
+  {
+    "name": "minimal",
+    "tx": {
+      "account_number": "V1",
+      "chain_id": "V2",
+      "fee": {
+        "amount": [
+          {
+            "amount": "b"
+          },
+          {
+            "c": "d"
+          },
+          {
+            "x": "y"
+          }
+        ],
+        "gas": "V3"
+      },
+      "memo": "V4",
+      "msgs": [],
+      "sequence": "V5"
+    },
+    "parsingErr": "No error",
+    "validationErr": "Unexpected field",
+    "expected": [
+      "0 | Chain ID : V2",
+      "1 | Account : V1",
+      "2 | Sequence : V5",
+      "3 | Memo : V4",
+      "4 | fee/amount : Unexpected field",
+      "5 | Gas : V3"
+    ],
+    "expert": true
+  },
+  {
+    "name": "multipleMessages",
+    "tx": {
+      "account_number": "V1",
+      "chain_id": "V2",
+      "fee": {
+        "amount": [
+          {
+            "amount": "b",
+            "denom": "d"
+          }
+        ],
+        "gas": "V3"
+      },
+      "memo": "V4",
+      "msgs": [
+        {
+          "m1": "z1"
+        },
+        {
+          "m2": "z2"
+        },
+        {
+          "m3": "z3"
+        }
+      ],
+      "sequence": "V5"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : V2",
+      "1 | Account : V1",
+      "2 | Sequence : V5",
+      "3 | msgs/m1 : z1",
+      "4 | msgs/m2 : z2",
+      "5 | msgs/m3 : z3",
+      "6 | Memo : V4",
+      "7 | Fee : b d",
+      "8 | Gas : V3"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransferExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "dimension_37-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : dimension_37-1",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 axpla",
+      "5 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 axpla",
+      "7 | Memo : testmemo",
+      "8 | Fee : 5 axpla",
+      "9 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransfer",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "dimension_37-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Network : XPLA Mainnet",
+      "1 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "2 | Source Coins : 10.000 XPLA",
+      "3 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "4 | Dest Coins : 10.000 XPLA",
+      "5 | Memo : testmemo",
+      "6 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "completeTransferNoMemoExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "test-chain-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing memo",
+    "expected": [
+      "0 | Chain ID : test-chain-1",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 axpla",
+      "5 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 axpla",
+      "7 | Fee : 5 axpla",
+      "8 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransferNoMemo",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "test-chain-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing memo",
+    "expected": [
+      "0 | Chain ID : test-chain-1",
+      "1 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "2 | Source Coins : 10.000 XPLA",
+      "3 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "4 | Dest Coins : 10.000 XPLA",
+      "5 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "completeTransferEmptyMemoExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "test-chain-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : test-chain-1",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 axpla",
+      "5 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 axpla",
+      "7 | Fee : 5 axpla",
+      "8 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransferEmptyMemo",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "2 | Source Coins : 10.000 XPLA",
+      "3 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "4 | Dest Coins : 10.000 XPLA",
+      "5 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "multipleTransfersExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "test-chain-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "address": "test2",
+              "coins": [
+                {
+                  "amount": "20",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "test3",
+              "coins": [
+                {
+                  "amount": "50",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : test-chain-1",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 axpla",
+      "5 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 axpla",
+      "7 | Source Address : test2",
+      "8 | Source Coins : 20 axpla",
+      "9 | Dest Address : test3",
+      "10 | Dest Coins : 50 axpla",
+      "11 | Memo : testmemo",
+      "12 | Fee : 5 axpla",
+      "13 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "multipleTransfers",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "address": "test2",
+              "coins": [
+                {
+                  "amount": "20000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "test3",
+              "coins": [
+                {
+                  "amount": "50000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "2 | Source Coins : 10.000 XPLA",
+      "3 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "4 | Dest Coins : 10.000 XPLA",
+      "5 | Source Address : test2",
+      "6 | Source Coins : 20.000 XPLA",
+      "7 | Dest Address : test3",
+      "8 | Dest Coins : 50.000 XPLA",
+      "9 | Memo : testmemo",
+      "10 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "delegationExpert",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Zondax.ch",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "axpla"
+            },
+            "delegator_address": "xpla102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 6571",
+      "2 | Sequence : 1",
+      "3 | Type : Delegate",
+      "4 | Amount : 1000000 axpla",
+      "5 | Delegator [1/2] : xpla102hty0jv2s29lyc4u0tv97z9v298e24t3v",
+      "5 | Delegator [2/2] : wtpl",
+      "6 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "6 | Validator [2/2] : 5s03xfytvz7",
+      "7 | Memo : Zondax.ch",
+      "8 | Fee : 5000 axpla",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "delegationDifferentChain",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "otherhub",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Zondax.ch",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "uatom"
+            },
+            "delegator_address": "xpla102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : otherhub",
+      "1 | Type : Delegate",
+      "2 | Amount : 1000000 uatom",
+      "3 | Delegator [1/2] : xpla102hty0jv2s29lyc4u0tv97z9v298e24t3v",
+      "3 | Delegator [2/2] : wtpl",
+      "4 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "4 | Validator [2/2] : 5s03xfytvz7",
+      "5 | Memo : Zondax.ch",
+      "6 | Fee : 5000 uatom"
+    ],
+    "expert": false
+  },
+  {
+    "name": "delegation",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Zondax.ch",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "10000000000000000000",
+              "denom": "axpla"
+            },
+            "delegator_address": "xpla102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Type : Delegate",
+      "2 | Amount : 10.000 XPLA",
+      "3 | Delegator [1/2] : xpla102hty0jv2s29lyc4u0tv97z9v298e24t3v",
+      "3 | Delegator [2/2] : wtpl",
+      "4 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "4 | Validator [2/2] : 5s03xfytvz7",
+      "5 | Memo : Zondax.ch",
+      "6 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "proposalExpert",
+    "tx": {
+      "account_number": "2",
+      "chain_id": "local-testnet",
+      "fee": {
+        "amount": [],
+        "gas": "500000"
+      },
+      "memo": "abc",
+      "msgs": [
+        {
+          "description": "test",
+          "initial_deposit": [
+            {
+              "amount": "1",
+              "denom": "stake"
+            }
+          ],
+          "proposal_type": "Text",
+          "proposer": "xpla101234567890abcdefghijklmnopqrstuvwxyz0",
+          "title": "test"
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : local-testnet",
+      "1 | Account : 2",
+      "2 | Sequence : 0",
+      "3 | msgs/description : test",
+      "4 | msgs/initial_deposit/amount : 1",
+      "5 | msgs/initial_deposit/denom : stake",
+      "6 | msgs/proposal_type : Text",
+      "7 | msgs/proposer [1/2] : xpla101234567890abcdefghijklmnopqrstuvw",
+      "7 | msgs/proposer [2/2] : xyz0",
+      "8 | msgs/title : test",
+      "9 | Memo : abc",
+      "10 | Fee : Empty",
+      "11 | Gas : 500000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "proposal",
+    "tx": {
+      "account_number": "2",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [],
+        "gas": "500000"
+      },
+      "memo": "abc",
+      "msgs": [
+        {
+          "description": "test",
+          "initial_deposit": [
+            {
+              "amount": "1",
+              "denom": "stake"
+            }
+          ],
+          "proposal_type": "Text",
+          "proposer": "xpla101234567890abcdefghijklmnopqrstuvwxyz0",
+          "title": "test"
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | msgs/description : test",
+      "2 | msgs/initial_deposit/amount : 1",
+      "3 | msgs/initial_deposit/denom : stake",
+      "4 | msgs/proposal_type : Text",
+      "5 | msgs/proposer [1/2] : xpla101234567890abcdefghijklmnopqrstuvw",
+      "5 | msgs/proposer [2/2] : xyz0",
+      "6 | msgs/title : test",
+      "7 | Memo : abc",
+      "8 | Fee : Empty"
+    ],
+    "expert": false
+  },
+  {
+    "name": "delegation2Expert",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Delegated with Ledger from union.market",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "axpla"
+            },
+            "delegator_address": "xpla102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 6571",
+      "2 | Sequence : 0",
+      "3 | Type : Delegate",
+      "4 | Amount : 1000000 axpla",
+      "5 | Delegator [1/2] : xpla102hty0jv2s29lyc4u0tv97z9v298e24t3v",
+      "5 | Delegator [2/2] : wtpl",
+      "6 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "6 | Validator [2/2] : 5s03xfytvz7",
+      "7 | Memo : Delegated with Ledger from union.market",
+      "8 | Fee : 5000 axpla",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "delegation2",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Delegated with Ledger from union.market",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "10000000000000000000",
+              "denom": "axpla"
+            },
+            "delegator_address": "xpla102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Type : Delegate",
+      "2 | Amount : 10.000 XPLA",
+      "3 | Delegator [1/2] : xpla102hty0jv2s29lyc4u0tv97z9v298e24t3v",
+      "3 | Delegator [2/2] : wtpl",
+      "4 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "4 | Validator [2/2] : 5s03xfytvz7",
+      "5 | Memo : Delegated with Ledger from union.market",
+      "6 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "badcase",
+    "tx": {
+      "chain_id": "1234567890AB",
+      "fee": "1234"
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing sequence",
+    "expected": [
+      "0 | Chain ID : 1234567890AB",
+      "1 | fee : 1234"
+    ],
+    "expert": true
+  },
+  {
+    "name": "badcase2",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Delegated with Ledger from union.market",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "axpla"
+            },
+            "delegator_address": "xpla102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 6571",
+      "2 | Sequence : 0",
+      "3 | Type : Delegate",
+      "4 | Amount : 1000000 axpla",
+      "5 | Delegator [1/2] : xpla102hty0jv2s29lyc4u0tv97z9v298e24t3v",
+      "5 | Delegator [2/2] : wtpl",
+      "6 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "6 | Validator [2/2] : 5s03xfytvz7",
+      "7 | Memo : Delegated with Ledger from union.market",
+      "8 | Fee : 5000 axpla",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "oldStackOverflow",
+    "tx": {
+      "1": [
+        [
+          [
+            [
+              [
+                [
+                  [
+                    [
+                      [
+                        [
+                          [
+                            [
+                              {
+                                "2": "4"
+                              }
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing chain_id",
+    "expected": [
+    ],
+    "expert": true
+  },
+  {
+    "name": "groupingSmallExpert",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "4 | Delegator [2/2] : qhwh",
+      "5 | Validator [1/2] : xplavaloper1qwl879nx9t6kef4supyazayf7vj",
+      "5 | Validator [2/2] : hennyh568ys",
+      "6 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "6 | Delegator [2/2] : qhwh",
+      "7 | Validator [1/2] : xplavaloper1x88j7vp2xnw3zec8ur3g4waxycy",
+      "7 | Validator [2/2] : z7m0mahdv3p",
+      "8 | Fee : 600 axpla",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "groupingSmall",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Type : Withdraw Reward",
+      "2 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "2 | Delegator [2/2] : qhwh",
+      "3 | Validator [1/2] : xplavaloper1qwl879nx9t6kef4supyazayf7vj",
+      "3 | Validator [2/2] : hennyh568ys",
+      "4 | Validator [1/2] : xplavaloper1x88j7vp2xnw3zec8ur3g4waxycy",
+      "4 | Validator [2/2] : z7m0mahdv3p",
+      "5 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "groupingExpert",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1ttfytaf43nkytzp8hkfjfgjc693ky4t3y2n2ku"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "4 | Delegator [2/2] : qhwh",
+      "5 | Validator [1/2] : xplavaloper1qwl879nx9t6kef4supyazayf7vj",
+      "5 | Validator [2/2] : hennyh568ys",
+      "6 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "6 | Delegator [2/2] : qhwh",
+      "7 | Validator [1/2] : xplavaloper1x88j7vp2xnw3zec8ur3g4waxycy",
+      "7 | Validator [2/2] : z7m0mahdv3p",
+      "8 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "8 | Delegator [2/2] : qhwh",
+      "9 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "9 | Validator [2/2] : 5s03xfytvz7",
+      "10 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "10 | Delegator [2/2] : qhwh",
+      "11 | Validator [1/2] : xplavaloper1ttfytaf43nkytzp8hkfjfgjc693",
+      "11 | Validator [2/2] : ky4t3y2n2ku",
+      "12 | Fee : 600 axpla",
+      "13 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "grouping_ledger_testcase",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "xplavaloper1kn3wugetjuy4zetlq6wadchfhvu3x740ae6z6x"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "xplavaloper1sjllsnramtg3ewxqwwrwjxfgc4n4ef9u2lcnj0"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "xplavaloper1ey69r37gfxvxg62sh4r0ktpuc46pzjrm873ae8"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "xplavaloper1648ynlpdw7fqa2axt0w2yp3fk542junl7rsvq6"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87j",
+      "4 | Delegator [2/2] : ycah",
+      "5 | Validator [1/2] : xplavaloper1kn3wugetjuy4zetlq6wadchfhvu",
+      "5 | Validator [2/2] : 3x740ae6z6x",
+      "6 | Delegator [1/2] : xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87j",
+      "6 | Delegator [2/2] : ycah",
+      "7 | Validator [1/2] : xplavaloper1sjllsnramtg3ewxqwwrwjxfgc4n",
+      "7 | Validator [2/2] : 4ef9u2lcnj0",
+      "8 | Delegator [1/2] : xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87j",
+      "8 | Delegator [2/2] : ycah",
+      "9 | Validator [1/2] : xplavaloper1ey69r37gfxvxg62sh4r0ktpuc46",
+      "9 | Validator [2/2] : pzjrm873ae8",
+      "10 | Delegator [1/2] : xpla1kky4yzth6gdrm8ga5zlfwhav33yr7hl87j",
+      "10 | Delegator [2/2] : ycah",
+      "11 | Validator [1/2] : xplavaloper1648ynlpdw7fqa2axt0w2yp3fk54",
+      "11 | Validator [2/2] : 2junl7rsvq6",
+      "12 | Fee : 600 axpla",
+      "13 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "massive",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1ttfytaf43nkytzp8hkfjfgjc693ky4t3y2n2ku"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1wdrypwex63geqswmcy5qynv4w3z3dyef2qmyna"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper102ruvpv2srmunfffxavttxnhezln6fnc54at8c"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper10e4vsut6suau8tk9m6dnrm0slgd6npe3jx5xpv"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1sxx9mszve0gaedz5ld7qdkjkfv8z992ax69k08"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1ssm0d433seakyak8kcf93yefhknjleeds4y3em"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper13sduv92y3xdhy3rpmhakrc3v7t37e7ps9l0kpv"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper15urq2dtp9qce4fyc85m6upwm9xul3049e02707"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper14kn0kk33szpwus9nh8n87fjel8djx0y070ymmj"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper14lultfckehtszvzw4ehu0apvsr77afvyju5zzy"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1k9a0cs97vul8w2vwknlfmpez6prv8klv03lv3d"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1kj0h4kn4z5xvedu2nd9c4a9a559wvpuvu0h6qn"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "xplavaloper1hjct6q7npsspsg3dgvzk3sdf89spmlpfdn6m9d"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "4 | Delegator [2/2] : qhwh",
+      "5 | Validator [1/2] : xplavaloper1qwl879nx9t6kef4supyazayf7vj",
+      "5 | Validator [2/2] : hennyh568ys",
+      "6 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "6 | Delegator [2/2] : qhwh",
+      "7 | Validator [1/2] : xplavaloper1x88j7vp2xnw3zec8ur3g4waxycy",
+      "7 | Validator [2/2] : z7m0mahdv3p",
+      "8 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "8 | Delegator [2/2] : qhwh",
+      "9 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "9 | Validator [2/2] : 5s03xfytvz7",
+      "10 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "10 | Delegator [2/2] : qhwh",
+      "11 | Validator [1/2] : xplavaloper1ttfytaf43nkytzp8hkfjfgjc693",
+      "11 | Validator [2/2] : ky4t3y2n2ku",
+      "12 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "12 | Delegator [2/2] : qhwh",
+      "13 | Validator [1/2] : xplavaloper1wdrypwex63geqswmcy5qynv4w3z",
+      "13 | Validator [2/2] : 3dyef2qmyna",
+      "14 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "14 | Delegator [2/2] : qhwh",
+      "15 | Validator [1/2] : xplavaloper102ruvpv2srmunfffxavttxnhezl",
+      "15 | Validator [2/2] : n6fnc54at8c",
+      "16 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "16 | Delegator [2/2] : qhwh",
+      "17 | Validator [1/2] : xplavaloper10e4vsut6suau8tk9m6dnrm0slgd",
+      "17 | Validator [2/2] : 6npe3jx5xpv",
+      "18 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "18 | Delegator [2/2] : qhwh",
+      "19 | Validator [1/2] : xplavaloper1sxx9mszve0gaedz5ld7qdkjkfv8",
+      "19 | Validator [2/2] : z992ax69k08",
+      "20 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "20 | Delegator [2/2] : qhwh",
+      "21 | Validator [1/2] : xplavaloper1ssm0d433seakyak8kcf93yefhkn",
+      "21 | Validator [2/2] : jleeds4y3em",
+      "22 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "22 | Delegator [2/2] : qhwh",
+      "23 | Validator [1/2] : xplavaloper13sduv92y3xdhy3rpmhakrc3v7t3",
+      "23 | Validator [2/2] : 7e7ps9l0kpv",
+      "24 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "24 | Delegator [2/2] : qhwh",
+      "25 | Validator [1/2] : xplavaloper15urq2dtp9qce4fyc85m6upwm9xu",
+      "25 | Validator [2/2] : l3049e02707",
+      "26 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "26 | Delegator [2/2] : qhwh",
+      "27 | Validator [1/2] : xplavaloper14kn0kk33szpwus9nh8n87fjel8d",
+      "27 | Validator [2/2] : jx0y070ymmj",
+      "28 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "28 | Delegator [2/2] : qhwh",
+      "29 | Validator [1/2] : xplavaloper14lultfckehtszvzw4ehu0apvsr7",
+      "29 | Validator [2/2] : 7afvyju5zzy",
+      "30 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "30 | Delegator [2/2] : qhwh",
+      "31 | Validator [1/2] : xplavaloper1k9a0cs97vul8w2vwknlfmpez6pr",
+      "31 | Validator [2/2] : v8klv03lv3d",
+      "32 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "32 | Delegator [2/2] : qhwh",
+      "33 | Validator [1/2] : xplavaloper1kj0h4kn4z5xvedu2nd9c4a9a559",
+      "33 | Validator [2/2] : wvpuvu0h6qn",
+      "34 | Delegator [1/2] : xpla14lultfckehtszvzw4ehu0apvsr77afvyhg",
+      "34 | Delegator [2/2] : qhwh",
+      "35 | Validator [1/2] : xplavaloper1hjct6q7npsspsg3dgvzk3sdf89s",
+      "35 | Validator [2/2] : pmlpfdn6m9d",
+      "36 | Fee : 600 axpla",
+      "37 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "combined",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla19umvgcvk8cxsvzemy239nj9ngc2ltukantgyp3",
+            "validator_address": "xplavaloper1648ynlpdw7fqa2axt0w2yp3fk542junl7rsvq6"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgDelegate",
+          "value": {
+            "delegator_address": "xpla19umvgcvk8cxsvzemy239nj9ngc2ltukantgyp3",
+            "validator_address": "xplavaloper1648ynlpdw7fqa2axt0w2yp3fk542junl7rsvq6",
+            "amount": {
+              "denom": "axpla",
+              "amount": "20139397000000000000"
+            }
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Type : Withdraw Reward",
+      "2 | Delegator [1/2] : xpla19umvgcvk8cxsvzemy239nj9ngc2ltukant",
+      "2 | Delegator [2/2] : gyp3",
+      "3 | Validator [1/2] : xplavaloper1648ynlpdw7fqa2axt0w2yp3fk54",
+      "3 | Validator [2/2] : 2junl7rsvq6",
+      "4 | Type : Delegate",
+      "5 | Amount : 20.139397 XPLA",
+      "6 | Validator [1/2] : xplavaloper1648ynlpdw7fqa2axt0w2yp3fk54",
+      "6 | Validator [2/2] : 2junl7rsvq6",
+      "7 | Fee : 0.600 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "completeTransferWithTips",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "feecoin1"
+          },
+          {
+            "amount": "6",
+            "denom": "feecoin2"
+          }
+        ],
+        "gas": "10000",
+        "granter": "xplaaccaddr1d9h8xxxGRANTER",
+        "payer": "xplaaccaddr1d9h8qatxxPAYER"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qatxxINPUT",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hguxxOUTPUT",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1",
+      "tip": {
+        "amount": [
+          {
+            "amount": "65",
+            "denom": "tipcoin"
+          },
+          {
+            "amount": "66",
+            "denom": "tipcoin2"
+          }
+        ],
+        "tipper": "xplaaccaddr1d9h8qatxTIPPER"
+      }
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : xplaaccaddr1d9h8qatxxINPUT",
+      "4 | Source Coins : 10 axpla",
+      "5 | Dest Address : xplaaccaddr1da6hguxxOUTPUT",
+      "6 | Dest Coins : 10 axpla",
+      "7 | Memo : testmemo",
+      "8 | Fee [1/2] : 5 feecoin1",
+      "8 | Fee [2/2] : 6 feecoin2",
+      "9 | Gas : 10000",
+      "10 | Granter : xplaaccaddr1d9h8xxxGRANTER",
+      "11 | Payer : xplaaccaddr1d9h8qatxxPAYER",
+      "12 | Tip [1/2] : 65 tipcoin",
+      "12 | Tip [2/2] : 66 tipcoin2",
+      "13 | Tipper : xplaaccaddr1d9h8qatxTIPPER"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransferWithTipsBasic",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000",
+        "granter": "xplaaccaddr1d9h8xxxGRANTER",
+        "payer": "xplaaccaddr1d9h8qatxxPAYER"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qatxxINPUT",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hguxxOUTPUT",
+              "coins": [
+                {
+                  "amount": "10000000000000000000",
+                  "denom": "axpla"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1",
+      "tip": {
+        "amount": [
+          {
+            "amount": "65",
+            "denom": "tipcoin"
+          },
+          {
+            "amount": "66",
+            "denom": "tipcoin2"
+          }
+        ],
+        "tipper": "xplaaccaddr1d9h8qatxTIPPER"
+      }
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Source Address : xplaaccaddr1d9h8qatxxINPUT",
+      "2 | Source Coins : 10.000 XPLA",
+      "3 | Dest Address : xplaaccaddr1da6hguxxOUTPUT",
+      "4 | Dest Coins : 10.000 XPLA",
+      "5 | Memo : testmemo",
+      "6 | Fee : 0.500 XPLA",
+      "7 | Tip [1/2] : 65 tipcoin",
+      "7 | Tip [2/2] : 66 tipcoin2",
+      "8 | Tipper : xplaaccaddr1d9h8qatxTIPPER"
+    ],
+    "expert": false
+  },
+  {
+    "name": "doubleFees",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "feecoin1"
+          },
+          {
+            "amount": "6",
+            "denom": "feecoin2"
+          }
+        ],
+        "gas": "10000",
+        "granter": "cosmosaccaddr1d9h8xxxGRANTER",
+        "payer": "cosmosaccaddr1d9h8qatxxPAYER"
+      },
+      "memo": "",
+      "msgs": [],
+      "sequence": "1",
+      "tip": {
+        "amount": [
+          {
+            "amount": "65",
+            "denom": "tipcoin"
+          },
+          {
+            "amount": "66",
+            "denom": "tipcoin2"
+          }
+        ],
+        "tipper": "cosmosaccaddr1d9h8qatxTIPPER"
+      }
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Fee [1/2] : 5 feecoin1",
+      "3 | Fee [2/2] : 6 feecoin2",
+      "4 | Gas : 10000",
+      "5 | Granter : cosmosaccaddr1d9h8xxxGRANTER",
+      "6 | Payer : cosmosaccaddr1d9h8qatxxPAYER",
+      "7 | Tip [1/2] : 65 tipcoin",
+      "7 | Tip [2/2] : 66 tipcoin2",
+      "8 | Tipper : cosmosaccaddr1d9h8qatxTIPPER"
+    ],
+    "expert": true
+  },
+  {
+    "name": "MsgWithdrawValidatorCommission",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "500000000000000000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Zondax.ch",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgWithdrawValidatorCommission",
+          "value": {
+            "validator_address": "xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Type : Withdraw Val. Commission",
+      "2 | Validator [1/2] : xplavaloper1grgelyng2v6v3t8z87wu3sxgt9m",
+      "2 | Validator [2/2] : 5s03xfytvz7",
+      "3 | Memo : Zondax.ch",
+      "4 | Fee : 0.500 XPLA"
+    ],
+    "expert": false
+  },
+  {
+    "name": "MsgMultiSend",
+    "tx": {
+      "account_number": "8",
+      "chain_id": "testing",
+      "fee": {
+        "amount": [
+          {
+            "amount": "0",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgMultiSend",
+          "value": {
+            "inputs": [
+              {
+                "address": "xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69d6cv",
+                "coins": [
+                  {
+                    "amount": "101000",
+                    "denom": "axpla"
+                  }
+                ]
+              }
+            ],
+            "outputs": [
+              {
+                "address": "xpla13dr26wdygna3s8fdl5tlc45m2le2ydydgjk8ek",
+                "coins": [
+                  {
+                    "amount": "1000",
+                    "denom": "axpla"
+                  }
+                ]
+              },
+              {
+                "address": "xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69d6cv",
+                "coins": [
+                  {
+                    "amount": "100000",
+                    "denom": "axpla"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : testing",
+      "1 | Account : 8",
+      "2 | Sequence : 0",
+      "3 | Type : Multi Send",
+      "4 | Source Address [1/2] : xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69",
+      "4 | Source Address [2/2] : d6cv",
+      "5 | Source Coins : 101000 axpla",
+      "6 | Dest Address [1/2] : xpla13dr26wdygna3s8fdl5tlc45m2le2ydydgj",
+      "6 | Dest Address [2/2] : k8ek",
+      "7 | Dest Coins : 1000 axpla",
+      "8 | Dest Address [1/2] : xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69",
+      "8 | Dest Address [2/2] : d6cv",
+      "9 | Dest Coins : 100000 axpla",
+      "10 | Fee : 0 axpla",
+      "11 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "minimal_extra_field",
+    "tx": {
+      "account_number": "V1",
+      "chain_id": "V2",
+      "fee": {
+        "amount": [
+          {
+            "amount": "b"
+          },
+          {
+            "c": "d"
+          },
+          {
+            "x": "y"
+          }
+        ],
+        "gas": "V3"
+      },
+      "foo": "bar",
+      "memo": "V4",
+      "msgs": [],
+      "sequence": "V5",
+      "unknown_param": "123456"
+    },
+    "foo": "bar",
+    "parsingErr": "No error",
+    "validationErr": "Unexpected field",
+    "expected": [
+      "0 | Chain ID : V2",
+      "1 | Account : V1",
+      "2 | Sequence : V5",
+      "3 | Memo : V4",
+      "4 | fee/amount : Unexpected field",
+      "5 | Gas : V3"
+    ],
+    "expert": true
+  },
+  {
+    "name": "ibc_denoms",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "cube_47-5",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "xplaaccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "xplaaccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : cube_47-5",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : xplaaccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins [1/2] : 10 ibc/27394FB092D2ECCD56123C74F36E4C1F",
+      "4 | Source Coins [2/2] : 926001CEADA9CA97EA622B25F41E5EB2",
+      "5 | Dest Address : xplaaccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins [1/2] : 10 ibc/27394FB092D2ECCD56123C74F36E4C1F",
+      "6 | Dest Coins [2/2] : 926001CEADA9CA97EA622B25F41E5EB2",
+      "7 | Memo : testmemo",
+      "8 | Fee : 5 axpla",
+      "9 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+		"name": "huge_test",
+		"tx": {
+			"account_number": "1",
+			"chain_id": "my-chain",
+			"fee": { "amount": [{ "amount": "2000", "denom": "axpla" }], "gas": "100000", "granter": "xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8eyhs", "payer": "xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8eyhs" },
+			"memo": "\\u003e ⚛️\\u269B⚛️     ",
+			"msgs": [
+				{
+					"type": "cosmos-sdk/MsgExec",
+					"value": {
+						"grantee": "xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8eyhs",
+						"msgs": [
+							{
+								"type": "cosmos-sdk/MsgSend",
+								"value": {
+									"amount": [{ "amount": "10000000", "denom": "axpla" }],
+									"from_address": "xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8eyhs",
+									"to_address": "xpla1ejrf4cur2wy6kfurg9f2jppp2h3afe5h6pkh5t"
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "cosmos-sdk/v1/MsgVote",
+					"value": {
+						"metadata": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Also it ends in  a single ampersand @",
+						"option": 1,
+						"proposal_id": "1",
+						"voter": "xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8eyhs"
+					}
+				}
+			],
+			"sequence": "2",
+			"timeout_height": "20",
+			"tip": {
+				"amount": [
+					{ "amount": "20000", "denom": "axpla" },
+					{ "amount": "30000", "denom": "uosmo" }
+				],
+				"tipper": "xpla1ejrf4cur2wy6kfurg9f2jppp2h3afe5h6pkh5t"
+			}
+		},
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : my-chain",
+      "1 | Account : 1",
+      "2 | Sequence : 2",
+      "3 | Type : cosmos-sdk/MsgExec",
+      "4 | msgs/value/grantee [1/2] : xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8",
+      "4 | msgs/value/grantee [2/2] : eyhs",
+      "5 | msgs/value/msgs [1/6] : [{\"type\":\"cosmos-sdk/MsgSend\",\"value\":{",
+      "5 | msgs/value/msgs [2/6] : \"amount\":[{\"amount\":\"10000000\",\"denom\":",
+      "5 | msgs/value/msgs [3/6] : \"axpla\"}],\"from_address\":\"xpla1ulav3hse",
+      "5 | msgs/value/msgs [4/6] : nupswqfkw2y3sup5kgtqwnvqa8eyhs\",\"to_add",
+      "5 | msgs/value/msgs [5/6] : ress\":\"xpla1ejrf4cur2wy6kfurg9f2jppp2h3",
+      "5 | msgs/value/msgs [6/6] : afe5h6pkh5t\"}}]",
+      "6 | Type : cosmos-sdk/v1/MsgVote",
+      "7 | msgs/value/metadata [1/13] : Lorem ipsum dolor sit amet, consectetur",
+      "7 | msgs/value/metadata [2/13] :  adipiscing elit, sed do eiusmod tempor",
+      "7 | msgs/value/metadata [3/13] :  incididunt ut labore et dolore magna a",
+      "7 | msgs/value/metadata [4/13] : liqua. Ut enim ad minim veniam, quis no",
+      "7 | msgs/value/metadata [5/13] : strud exercitation ullamco laboris nisi",
+      "7 | msgs/value/metadata [6/13] :  ut aliquip ex ea commodo consequat. Du",
+      "7 | msgs/value/metadata [7/13] : is aute irure dolor in reprehenderit in",
+      "7 | msgs/value/metadata [8/13] :  voluptate velit esse cillum dolore eu",
+      "7 | msgs/value/metadata [9/13] : fugiat nulla pariatur. Excepteur sint o",
+      "7 | msgs/value/metadata [10/13] : ccaecat cupidatat non proident, sunt in",
+      "7 | msgs/value/metadata [11/13] :  culpa qui officia deserunt mollit anim",
+      "7 | msgs/value/metadata [12/13] :  id est laborum. Also it ends in  a sin",
+      "7 | msgs/value/metadata [13/13] : gle ampersand @",
+      "8 | Option : 1",
+      "9 | Proposal ID : 1",
+      "10 | Description [1/2] : xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8",
+      "10 | Description [2/2] : eyhs",
+      "11 | Memo [1/2] : \\\\u003e \\u269b\\ufe0f\\\\u269B\\u269b\\ufe0f",
+      "11 | Memo [2/2] :     ",
+      "12 | Fee : 2000 axpla",
+      "13 | Gas : 100000",
+      "14 | Granter [1/2] : xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8",
+      "14 | Granter [2/2] : eyhs",
+      "15 | Payer [1/2] : xpla1ulav3hsenupswqfkw2y3sup5kgtqwnvqa8",
+      "15 | Payer [2/2] : eyhs",
+      "16 | Tip [1/2] : 20000 axpla",
+      "16 | Tip [2/2] : 30000 uosmo",
+      "17 | Tipper [1/2] : xpla1ejrf4cur2wy6kfurg9f2jppp2h3afe5h6p",
+      "17 | Tipper [2/2] : kh5t"
+   ],
+    "expert": true
+	},
+  {
+    "name": "MsgSetWithdrawAddress",
+    "tx":{
+      "account_number": "8",
+      "chain_id": "testing",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "axpla"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "cosmos-sdk/MsgSetWithdrawAddress",
+          "value": {
+            "delegator_address": "xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69d6cv",
+            "withdraw_address": "xpla12d64j98tjjpqkx70r08aspc4nvntqp2w6wr2de"
+          }
+        },
+        {
+          "type": "cosmos-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69d6cv",
+            "validator_address": "xplavaloper13dr26wdygna3s8fdl5tlc45m2le2ydyddxzj49"
+          }
+        }
+      ],
+      "sequence": "7"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : testing",
+      "1 | Account : 8",
+      "2 | Sequence : 7",
+      "3 | Type : Withdraw Set Address",
+      "4 | Delegator [1/2] : xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69",
+      "4 | Delegator [2/2] : d6cv",
+      "5 | Withdraw Address [1/2] : xpla12d64j98tjjpqkx70r08aspc4nvntqp2w6w",
+      "5 | Withdraw Address [2/2] : r2de",
+      "6 | Type : Withdraw Reward",
+      "7 | Delegator [1/2] : xpla1hr9x0sjvel6z3vt9qny8sdd5gnnlgk0p69",
+      "7 | Delegator [2/2] : d6cv",
+      "8 | Validator [1/2] : xplavaloper13dr26wdygna3s8fdl5tlc45m2le",
+      "8 | Validator [2/2] : 2ydyddxzj49",
+      "9 | Fee : 5000 axpla",
+      "10 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "Gaia_Sign_00",
+    "tx": {
+      "account_number":"8",
+      "sequence":"2",
+      "chain_id":"my-chain",
+      "memo":"A B C",
+      "fee":{
+          "amount":[],
+          "gas":"200000"
+      },
+      "msgs":[{
+        "type":"cosmos-sdk/MsgDeposit",
+        "value":{
+          "amount":[{
+            "amount":"10",
+            "denom":"stake"
+            }],
+          "depositor":"xpla1xl2256vdh0j68khz9wq88hnyqcq0f5f4za2480",
+          "proposal_id":"1"
+        }
+      }]
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : my-chain",
+      "1 | Account : 8",
+      "2 | Sequence : 2",
+      "3 | Type : Deposit",
+      "4 | Amount : 10 stake",
+      "5 | Sender [1/2] : xpla1xl2256vdh0j68khz9wq88hnyqcq0f5f4za",
+      "5 | Sender [2/2] : 2480",
+      "6 | Proposal ID : 1",
+      "7 | Memo : A B C",
+      "8 | Fee : Empty",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "Gaia_Sign_01",
+    "tx": {
+      "account_number":"123",
+      "sequence":"8",
+      "chain_id":"my-chain",
+      "fee":{
+        "amount":[{
+          "denom":"axpla",
+          "amount":"54"
+        }],
+        "gas_limit":"106309",
+        "granter": "xplaaccaddr1d9h8xxxGRANTER",
+        "payer": "xplaaccaddr1d9h8qatxxPAYER"
+      },
+
+      "msgs":[{
+        "type":"cosmos-sdk/MsgDeposit",
+        "value":{
+          "amount":[{
+            "amount":"255000000",
+            "denom":"axpla"
+          }],
+          "depositor":"xpla1849m9wncrqp6v4tkss6a3j8uzvuv0cp7wcgvqa",
+          "proposal_id":"44"
+        }
+      }],
+      "memo":"",
+      "timeout_height":"0",
+      "extension_options":[],
+      "non_critical_extension_options":[],
+      "auth_info":{
+        "signer_infos":[]
+      },
+      "signatures":[]
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : my-chain",
+      "1 | Account : 123",
+      "2 | Sequence : 8",
+      "3 | Type : Deposit",
+      "4 | Amount : 255000000 axpla",
+      "5 | Sender [1/2] : xpla1849m9wncrqp6v4tkss6a3j8uzvuv0cp7wc",
+      "5 | Sender [2/2] : gvqa",
+      "6 | Proposal ID : 44",
+      "7 | Fee : 54 axpla",
+      "8 | fee/gas_limit : 106309",
+      "9 | Granter : xplaaccaddr1d9h8xxxGRANTER",
+      "10 | Payer : xplaaccaddr1d9h8qatxxPAYER"
+    ],
+    "expert": true
+  }
+]
