@@ -1,13 +1,13 @@
 # ubuntu 22.04에서의 빌드
 
-### 1. 필요한 패키지 설치
+### 1. 빌드에 필요한 패키지 설치
 ```sh
-sudo apt install build-essential git wget cmake libssl-dev libgmp-dev autoconf libtool
+sudo apt install build-essential git wget cmake libssl-dev libgmp-dev autoconf libtool curl
 ```
 
 ### 2. 파이썬3 설치
 ```sh
-sudo apt install python3 python-is-python3 python3-pip curl
+sudo apt install python3 python-is-python3 python3-pip
 python --version && pip --version
 ```
 
