@@ -78,12 +78,15 @@ cmake-build-fuzz/
 /app/obj/
 
 \deps/*
+!\deps/jsmn
 !\deps/nanos-secure-sdk
+!\deps/nanosplus-secure-sdk
 !\deps/nanox-secure-sdk
 !\deps/ledger-zxlib
 !\deps/tinycbor
 !\deps/tinycbor-ledger
 !\deps/BLAKE
+!\deps/.gitkeep
 
 app/src/glyphs.c
 
